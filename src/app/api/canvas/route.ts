@@ -24,14 +24,14 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(assignments);
     }
 
-    if (type === "assignment" && courseId && assignmentId) {
-      const assignment = await getAssignmentWithRubric(courseId, assignmentId);
-      return NextResponse.json(assignment);
-    }
-
     if (type === "files" && courseId) {
       const files = await getCourseFiles(courseId);
       return NextResponse.json(files);
+    }
+
+    if (type === "assignment-with-rubric" && courseId && assignmentId) {
+      const assignment = await getAssignmentWithRubric(courseId, assignmentId);
+      return NextResponse.json(assignment);
     }
 
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
